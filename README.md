@@ -1,50 +1,69 @@
-# 46elks MCP setup and connection checker
+# 46elks MCP server
 
-Generate 46elks MCP client configuration, inspect available tools and validate hosted endpoint access through PipMCP.
+Check the telecom account and explicitly approve one SMS to an authorized recipient.
 
-Maintainer: jannikco · License: MIT · Verification: **mock-only**
+A direct-provider MCP server with useful local execution. No PipMCP account is required for local use. Provider API access and any provider charges are your responsibility.
 
 ## Quick start
 
-Requires Node.js 22 or later.
+Requires Node.js22+. Clone this repository, then run:
 
 ```sh
-npm ci
+npm ci --ignore-scripts
 npm test
 npm start
 ```
 
-The default example runs locally without credentials and makes no external changes. Verification status describes recorded evidence; local configuration tests do not establish that provider authentication or execution works.
+The default command inspects the tools offline. Configure your own credentials in your environment:
 
-## Connect 46elks
+- `ELKS46_API_USERNAME`
+- `ELKS46_API_PASSWORD`
 
-[Create or sign in to PipMCP](https://pipmcp.com/register?app=46elks&utm_source=github&utm_campaign=github-46elks-mcp) and select the integration. Connect your authorized provider account and copy its hosted MCP endpoint. Set PIPMCP_ENDPOINT and, if required, PIPMCP_TOKEN in your environment. Run npm start to produce client configuration; run npm start -- --live for a read-only connection check. Provider app presence is catalog evidence, not live verification.
 
-## Managed service
 
-[Continue with PipMCP](https://pipmcp.com/register?app=46elks&utm_source=github&utm_campaign=github-46elks-mcp). This repository is maintained by the integration team and does not imply endorsement by LinkedIn or other providers.
+Credential help: https://46elks.com/docs/overview
 
-## Provenance and support
+## Execute a real read
 
-Source revision: ac7645c888fd060a788e3e1e2c3639cad4a8ae05165bfedc1ef0370edf74b013. The complete manifest is in integration.json; SHA256SUMS covers the reviewed artifact. Open a repository issue without credentials or personal data. See SECURITY.md for sensitive reports. No telemetry is sent by this code; signup links include explicit campaign parameters.
+Replace example record IDs with records you are authorized to access.
 
-## Provider setup inventory
-
-Run `npm start -- --setup` to inspect this app's recorded authentication requirements and setup links offline. Credentials are entered in PipMCP; this repository lists required field names only.
-
-```json
-{
-  "type": "basic",
-  "requiredCredentialFields": [
-    "username",
-    "password"
-  ],
-  "requiredHeaderNames": [],
-  "helpUrl": "https://46elks.com/docs/overview",
-  "tenantRequired": false,
-  "accountParameterNames": []
-}
+```sh
+npm start -- --call elks46_get_account '{}'
 ```
 
-Provider documentation: https://raw.githubusercontent.com/46elks/46elks-getting-started/master/code-examples/Swagger/46elksAPI.yaml
-Provider website: https://46elks.com/
+## Use with an MCP client
+
+Launch `node /absolute/path/46elks-mcp/server.mjs` using stdio transport; pass credentials through the client environment. Stdout is reserved for JSON-RPC.
+
+## Tools
+
+| Tool | Effect | Purpose |
+| --- | --- | --- |
+| elks46_get_account | Read | elks46 get account |
+| elks46_send_sms | Explicit approval required | Send one SMS to an explicitly authorized recipient; consumes provider credits. |
+
+## Concrete workflow
+
+Check the telecom account and explicitly approve one SMS to an authorized recipient.
+
+1. elks46_get_account
+2. elks46_send_sms
+
+## Optional writes
+
+Writes are disabled by default. Set CONNECTOR_ALLOW_WRITES=true and supply `_approval: {approved:true,idempotencyKey:"unique-request-id"}` on the specific call. Do not reuse a key for a different request. Uncertain outcomes are never automatically replayed; inspect the provider before another attempt.
+
+## Capability evidence
+
+Local: **Tested — HTTP fixtures and real stdio tools/call**. Managed: **Documented**. Provider authentication and live operations have not been established by these fixture tests. Evidence applies per operation and execution mode; setup discovery does not imply provider execution.
+
+## Managed production
+
+[Activate with PipMCP](https://pipmcp.com/github/start?app=46elks&integration=46elks-mcp&utm_source=github&utm_campaign=github-46elks-mcp&utm_content=readme) when you want the hosted service.  Local credentials are not uploaded by this code. Review provider permissions in the managed onboarding. [Directory and related projects](https://jannikco.github.io/pipmcp-connectors/integrations/46elks/).
+
+## Provenance and maintenance
+
+- https://46elks.com/docs/send-sms
+- https://46elks.com/docs/me
+
+Maintainer:jannikco. MIT license for this code. See connector.json for selected operations and integration.json for evidence. Runtime dependencies retain their own licenses. Report sensitive issues through https://pipmcp.com/contact; do not post credentials or customer data in public issues.
