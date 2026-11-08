@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "status": "ready",
+  "verification": "mock-only",
+  "releaseEligible": true,
+  "maintainer": "jannikco",
+  "license": "MIT",
+  "sourceRevision": "ac7645c888fd060a788e3e1e2c3639cad4a8ae05165bfedc1ef0370edf74b013",
+  "evidence": [
+    "Source-backed provider setup metadata",
+    "Offline configuration and MCP protocol tests"
+  ],
+  "provenance": [
+    "https://raw.githubusercontent.com/46elks/46elks-getting-started/master/code-examples/Swagger/46elksAPI.yaml"
+  ],
+  "id": "46elks-mcp",
+  "kind": "mcp-setup",
+  "product": "pipmcp",
+  "title": "46elks MCP setup and connection checker",
+  "description": "Generate 46elks MCP client configuration, inspect available tools and validate hosted endpoint access through PipMCP.",
+  "operationIds": [],
+  "appSlug": "46elks",
+  "appName": "46elks",
+  "providerDocs": "https://raw.githubusercontent.com/46elks/46elks-getting-started/master/code-examples/Swagger/46elksAPI.yaml",
+  "providerWebsite": "https://46elks.com/",
+  "authentication": {
+    "type": "basic",
+    "requiredCredentialFields": [
+      "username",
+      "password"
+    ],
+    "requiredHeaderNames": [],
+    "helpUrl": "https://46elks.com/docs/overview",
+    "tenantRequired": false,
+    "accountParameterNames": []
+  },
+  "attributionSlug": "github-46elks-mcp"
+}
