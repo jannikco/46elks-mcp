@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "version": "1.0.0",
+  "product": "pipmcp",
+  "credential": "PIPMCP_API_KEY",
+  "skills": [
+    {
+      "name": "pipmcp-46elks",
+      "description": "Connect AI agents to 46elks using one PipMCP API key and actual hosted tool discovery."
+    }
+  ],
+  "files": {
+    "skills/pipmcp-46elks/SKILL.md": "7bb730cdb8577a8eda9becc21888a78a97457f3c0df5a0f8f90e53544ff1e5fa"
+  }
+}

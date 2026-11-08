@@ -1,279 +1,61 @@
 {
   "schemaVersion": 1,
+  "id": "46elks-mcp",
+  "kind": "provider-connector",
+  "product": "pipmcp",
+  "title": "46elks MCP server",
+  "description": "Use 46elks with AI agents through one PipMCP API key, actual hosted schemas and governed execution.",
   "status": "ready",
   "verification": "mock-only",
   "releaseEligible": true,
+  "operationIds": [],
   "maintainer": "jannikco",
   "license": "MIT",
-  "sourceRevision": "c8a5e0a1372ea029ffe467f89f4e5adece2202ccb805b01b40c48df64446529a",
+  "attributionSlug": "github-46elks-mcp",
+  "sourceRevision": "1d72b8e3c080ed260508bd3949334e96840bfd2b337c46f43c815e6564f522f5",
+  "qualityVersion": 2,
+  "artifactType": "connector",
   "evidence": [
-    "Actual tools/call and direct-provider request contract tests"
+    "Gateway HTTP transport fixtures",
+    "Generated stdio wrapper discovery/call fixtures"
   ],
   "provenance": [
     "https://46elks.com/docs/send-sms",
     "https://46elks.com/docs/me"
   ],
-  "id": "46elks-mcp",
-  "kind": "provider-connector",
-  "product": "pipmcp",
-  "title": "46elks MCP server",
-  "description": "Check the telecom account and explicitly approve one SMS to an authorized recipient.",
-  "operationIds": [
-    "elks46_get_account",
-    "elks46_send_sms"
-  ],
+  "utility": {
+    "problem": "Check the telecom account and explicitly approve one SMS to an authorized recipient.",
+    "output": "Actual hosted tool schemas and durable governed execution receipts"
+  },
   "appSlug": "46elks",
   "appName": "46elks",
-  "providerDocs": "https://raw.githubusercontent.com/46elks/46elks-getting-started/master/code-examples/Swagger/46elksAPI.yaml",
-  "providerWebsite": "https://46elks.com/",
-  "authentication": {
-    "type": "basic",
-    "requiredCredentialFields": [
-      "username",
-      "password"
-    ],
-    "settings": {},
-    "requiredHeaderNames": [],
-    "helpUrl": "https://46elks.com/docs/overview",
-    "tenantRequired": false,
-    "accountParameterNames": []
-  },
-  "attributionSlug": "github-46elks-mcp",
-  "artifactType": "connector",
-  "qualityVersion": 2,
   "connectorId": "46elks",
-  "connector": {
-    "id": "46elks",
-    "name": "46elks",
-    "version": "0.1.0",
-    "baseUrl": "https://api.46elks.com/a1",
-    "auth": {
-      "type": "basic",
-      "usernameEnv": "ELKS46_API_USERNAME",
-      "passwordEnv": "ELKS46_API_PASSWORD"
-    },
-    "tools": [
-      {
-        "name": "elks46_get_account",
-        "description": "elks46 get account",
-        "method": "GET",
-        "path": "/me",
-        "readOnly": true,
-        "inputSchema": {
-          "type": "object",
-          "properties": {},
-          "required": [],
-          "additionalProperties": false
-        },
-        "bindings": {
-          "path": [],
-          "query": {},
-          "body": {}
-        },
-        "approvalRequired": false,
-        "provenance": [
-          "https://46elks.com/docs/send-sms",
-          "https://46elks.com/docs/me"
-        ],
-        "evidence": {
-          "state": "documented",
-          "providerLiveValidation": "not-run"
-        },
-        "sampleArguments": {}
-      },
-      {
-        "name": "elks46_send_sms",
-        "description": "Send one SMS to an explicitly authorized recipient; consumes provider credits.",
-        "method": "POST",
-        "path": "/sms",
-        "readOnly": false,
-        "inputSchema": {
-          "type": "object",
-          "properties": {
-            "from": {
-              "type": "string"
-            },
-            "to": {
-              "type": "string"
-            },
-            "message": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "from",
-            "to",
-            "message"
-          ],
-          "additionalProperties": false
-        },
-        "bindings": {
-          "path": [],
-          "query": {},
-          "body": {
-            "from": "from",
-            "to": "to",
-            "message": "message"
-          }
-        },
-        "approvalRequired": true,
-        "contentType": "application/x-www-form-urlencoded",
-        "provenance": [
-          "https://46elks.com/docs/send-sms",
-          "https://46elks.com/docs/me"
-        ],
-        "evidence": {
-          "state": "documented",
-          "providerLiveValidation": "not-run"
-        },
-        "sampleArguments": {
-          "from": "Sandbox",
-          "to": "+15555550100",
-          "message": "Authorized sandbox test message."
-        }
-      }
-    ],
-    "workflow": {
-      "name": "46elks-workflow",
-      "description": "Check the telecom account and explicitly approve one SMS to an authorized recipient.",
-      "steps": [
-        "elks46_get_account",
-        "elks46_send_sms"
-      ]
-    },
-    "provenance": [
-      "https://46elks.com/docs/send-sms",
-      "https://46elks.com/docs/me"
-    ],
-    "sourceEvidence": {
-      "state": "documented",
-      "providerLiveValidation": "not-run",
-      "checkedAt": "2026-11-08",
-      "operationCount": 2,
-      "kind": "official-documentation"
-    },
-    "setup": {
-      "requiresPipMcpAccount": false,
-      "credentialsHelpUrl": "https://46elks.com/docs/overview",
-      "instructions": "Log in to your 46elks account dashboard and copy the API username and API password shown there (they are not your login email and password)."
-    },
-    "sampleWarning": "Example IDs are placeholders, not known provider records. Replace them with authorized sandbox/account IDs. Contact emails, file URLs and recipient numbers must be replaced with data you are authorized to use. Examples never authorize a write.",
-    "repoId": "46elks-mcp",
-    "appSlug": "46elks",
-    "product": "pipmcp",
-    "artifactType": "connector",
-    "sourceRevision": "c8a5e0a1372ea029ffe467f89f4e5adece2202ccb805b01b40c48df64446529a",
-    "capabilityEvidence": {
-      "local": {
-        "level": "Tested",
-        "operations": [
-          {
-            "name": "elks46_get_account",
-            "level": "Tested",
-            "evidenceRefs": [
-              "Provider request/stdio contract tests"
-            ],
-            "method": "contract-fixture"
-          },
-          {
-            "name": "elks46_send_sms",
-            "level": "Tested",
-            "evidenceRefs": [
-              "Provider request/stdio contract tests"
-            ],
-            "method": "contract-fixture"
-          }
-        ],
-        "evidenceRefs": [
-          "Provider request/stdio contract tests"
-        ],
-        "mode": "local"
-      },
-      "managed": {
-        "level": "Documented",
-        "operations": [
-          {
-            "name": "elks46_get_account",
-            "level": "Documented",
-            "evidenceRefs": [],
-            "method": "documentation"
-          },
-          {
-            "name": "elks46_send_sms",
-            "level": "Documented",
-            "evidenceRefs": [],
-            "method": "documentation"
-          }
-        ],
-        "evidenceRefs": [],
-        "mode": "managed"
-      }
-    },
-    "authentication": {
-      "type": "basic",
-      "requiredCredentialFields": [
-        "username",
-        "password"
-      ],
-      "settings": {},
-      "requiredHeaderNames": [],
-      "helpUrl": "https://46elks.com/docs/overview",
-      "tenantRequired": false,
-      "accountParameterNames": []
-    },
-    "managedAvailability": {
-      "status": "listed",
-      "checkedAt": "2026-11-08T12:29:10.433747+00:00"
-    }
-  },
+  "executionAuthority": "pipmcp-gateway",
+  "version": "1.0.0",
+  "agentReady": true,
   "capabilityEvidence": {
     "local": {
       "level": "Tested",
       "operations": [
         {
-          "name": "elks46_get_account",
+          "name": "gateway_transport",
           "level": "Tested",
+          "method": "contract-fixture",
           "evidenceRefs": [
-            "Provider request/stdio contract tests"
-          ],
-          "method": "contract-fixture"
-        },
-        {
-          "name": "elks46_send_sms",
-          "level": "Tested",
-          "evidenceRefs": [
-            "Provider request/stdio contract tests"
-          ],
-          "method": "contract-fixture"
+            "Generated gateway/stdio fixtures"
+          ]
         }
       ],
       "evidenceRefs": [
-        "Provider request/stdio contract tests"
+        "Generated gateway/stdio fixtures"
       ],
       "mode": "local"
     },
     "managed": {
       "level": "Documented",
-      "operations": [
-        {
-          "name": "elks46_get_account",
-          "level": "Documented",
-          "evidenceRefs": [],
-          "method": "documentation"
-        },
-        {
-          "name": "elks46_send_sms",
-          "level": "Documented",
-          "evidenceRefs": [],
-          "method": "documentation"
-        }
-      ],
+      "operations": [],
       "evidenceRefs": [],
       "mode": "managed"
     }
-  },
-  "utility": {
-    "problem": "Check the telecom account and explicitly approve one SMS to an authorized recipient.",
-    "output": "Actual provider API results through local MCP tools"
   }
 }
